@@ -1,21 +1,23 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-let budget = [];
+let budgetItems = [];
 
 app.get('/api/budget', (req, res) => {
-  res.json(budget);
+  res.json(budgetItems);
 });
 
 app.post('/api/budget', (req, res) => {
-  budget.push(req.body);
-  res.json({ message: 'Added' });
+  const item = req.body;
+  budgetItems.push(item);
+  res.status(201).json(item);
 });
 
-app.listen(3000, () => {
-  console.log('✅ Server running at http://localhost:3000');
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
