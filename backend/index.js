@@ -8,12 +8,16 @@ app.use(express.json());
 
 let budgetItems = [];
 
+
 app.get('/api/budget', (req, res) => {
+  console.log('Sending items:', budgetItems);  // 🧪 Debug log
   res.json(budgetItems);
 });
 
+
 app.post('/api/budget', (req, res) => {
   const item = req.body;
+  console.log('Received item:', item);  // 🧪 Debug log
   budgetItems.push(item);
   res.status(201).json(item);
 });
